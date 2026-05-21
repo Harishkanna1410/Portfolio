@@ -11,7 +11,7 @@ let adminEnabled = false;
 const firebaseProjectId = process.env.FIREBASE_PROJECT_ID;
 const firebaseClientEmail = process.env.FIREBASE_CLIENT_EMAIL;
 const firebasePrivateKey = process.env.FIREBASE_PRIVATE_KEY;
-const firebaseDatabaseUrl = process.env.FIREBASE_DATABASE_URL;
+const firebaseDatabaseUrl = process.env.FIREBASE_DATABASE_URL || (firebaseProjectId ? `https://${firebaseProjectId}.firebaseio.com` : undefined);
 
 if (firebaseProjectId && firebaseClientEmail && firebasePrivateKey && firebaseDatabaseUrl) {
   try {
@@ -64,14 +64,6 @@ async function getCollectionData(collectionName, fallbackData) {
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
-app.get('/api/projects', (req, res) => {
-  res.json([
-    { title: '3D Portfolio', description: 'Interactive 3D resume/portfolio site', link: '#', tech: ['Three.js','Node.js'] },
-    { title: 'Interactive Data Viz', description: 'Data visualization with D3/Three.js', link: '#', tech: ['D3','Three.js'] }
-  ]);
-});
-
-// Contact form endpoint (no email service configured; logs to server)
 app.get('/api/skills', async (req, res) => {
   try {
     const skills = await getCollectionData('skills', staticSkills);
