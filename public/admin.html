@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin — Harish Portfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div>
+          <p class="brand">Admin Panel</p>
+          <p class="brand-sub">Portfolio management console</p>
+        </div>
+        <nav class="nav-links">
+          <a href="/">Portfolio</a>
+          <a href="#contacts">Contacts</a>
+          <a href="#manage">Manage</a>
+        </nav>
+      </header>
+
+      <section class="section" id="access">
+        <div class="section-headline">
+          <span>Secure access</span>
+          <h2>Use your admin secret to access stored data.</h2>
+        </div>
+        <div class="contact-panel">
+          <label>Admin secret<input id="admin-secret" type="password" placeholder="Enter admin secret" /></label>
+          <button id="connect-admin" class="button">Unlock admin data</button>
+          <p class="note">If ADMIN_SECRET is set in your Firebase environment, this page uses it to access admin-only endpoints.</p>
+        </div>
+      </section>
+
+      <section class="section" id="contacts">
+        <div class="section-headline">
+          <span>Messages</span>
+          <h2>Incoming contact form submissions.</h2>
+        </div>
+        <div id="contact-list" class="projects-grid"></div>
+      </section>
+
+      <section class="section" id="manage">
+        <div class="section-headline">
+          <span>Manage content</span>
+          <h2>Add skills and projects directly from this admin page.</h2>
+        </div>
+        <div class="contact-shell">
+          <div class="contact-panel">
+            <h3>Add new skill</h3>
+            <label>Name<input id="skill-name" type="text" placeholder="Skill name" /></label>
+            <label>Level<input id="skill-level" type="text" placeholder="Expert/Advanced/Intermediate" /></label>
+            <button id="add-skill" class="button">Add skill</button>
+            <p id="skill-status" class="note"></p>
+          </div>
+          <div class="contact-panel">
+            <h3>Add new project</h3>
+            <label>Title<input id="project-title" type="text" placeholder="Project title" /></label>
+            <label>Description<textarea id="project-description" rows="4" placeholder="Short description"></textarea></label>
+            <label>Link<input id="project-link" type="url" placeholder="https://example.com" /></label>
+            <label>Tech tags<input id="project-tech" type="text" placeholder="react, node, firebase" /></label>
+            <button id="add-project" class="button">Add project</button>
+            <p id="project-status" class="note"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="/js/admin.js"></script>
+  </body>
+</html>
