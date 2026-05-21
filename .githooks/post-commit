@@ -1,0 +1,10 @@
+#!/bin/sh
+# Push the current branch after every successful local commit.
+# This hook is intended for local development only.
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+remote=$(git config --get remote.origin.url)
+
+if [ -n "$remote" ] && [ -n "$branch" ]; then
+  git push "$remote" "$branch"
+fi
