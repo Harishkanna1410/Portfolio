@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const https = require('https');
+const { URL } = require('url');
 const admin = require('firebase-admin');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,6 +14,63 @@ const firebaseProjectId = process.env.FIREBASE_PROJECT_ID;
 const firebaseClientEmail = process.env.FIREBASE_CLIENT_EMAIL;
 const firebasePrivateKey = process.env.FIREBASE_PRIVATE_KEY;
 const firebaseDatabaseUrl = process.env.FIREBASE_DATABASE_URL || (firebaseProjectId ? `https://${firebaseProjectId}.firebaseio.com` : undefined);
+const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
+
+async function notifyDiscord(contact) {
+  if (!discordWebhookUrl) {
+    console.warn('Discord webhook URL is not configured. Set DISCORD_WEBHOOK_URL in .env.');
+    return;
+  }
+
+  const webhookUrl = new URL(discordWebhookUrl);
+  const payload = {
+    content: `New contact form submission from ${contact.name} <${contact.email}>`,
+    embeds: [
+      {
+        title: 'Portfolio Contact Message',
+        description: contact.message || 'No message provided',
+        color: 3447003,
+        fields: [
+          { name: 'Name', value: contact.name || 'N/A', inline: true },
+          { name: 'Email', value: contact.email || 'N/A', inline: true },
+          { name: 'Message', value: contact.message || 'N/A' }
+        ],
+        timestamp: new Date().toISOString()
+      }
+    ]
+  };
+
+  const body = JSON.stringify(payload);
+  return new Promise((resolve, reject) => {
+    const request = https.request(
+      {
+        hostname: webhookUrl.hostname,
+        port: webhookUrl.port || 443,
+        path: webhookUrl.pathname + (webhookUrl.search || ''),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(body)
+        }
+      },
+      (res) => {
+        let data = '';
+        res.on('data', chunk => { data += chunk; });
+        res.on('end', () => {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(data);
+          } else {
+            reject(new Error(`Discord webhook failed (${res.statusCode}): ${data}`));
+          }
+        });
+      }
+    );
+
+    request.on('error', reject);
+    request.write(body);
+    request.end();
+  });
+}
 
 if (firebaseProjectId && firebaseClientEmail && firebasePrivateKey && firebaseDatabaseUrl) {
   try {
@@ -104,6 +163,15 @@ app.post('/api/contact', async (req, res) => {
     }
   } else {
     console.log('Contact form submission:', payload);
+  }
+
+  if (discordWebhookUrl) {
+    try {
+      await notifyDiscord(payload);
+      console.log('Discord webhook notification sent.');
+    } catch (error) {
+      console.error('Discord notification failed:', error);
+    }
   }
 
   res.json({ status: 'ok', message: 'Thanks, your message was received.' });
