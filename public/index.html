@@ -3,65 +3,115 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>3D Portfolio</title>
+    <title>Harish Kanna S — Portfolio</title>
+    <meta name="description" content="Dark-themed portfolio of Harish Kanna S, showing projects, skills, and contact information." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <header class="topbar">
-      <h1 class="brand">Harish Kanna S</h1>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="social">
-        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
-      </div>
-    </header>
+    <div class="site-shell">
+      <header class="topbar">
+        <div>
+          <p class="brand">Harish <span>Kanna S</span></p>
+          <p class="brand-sub">Digital Craftsman</p>
+        </div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="social-links">
+          <a href="https://github.com/Harishkanna1410" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/harishkanna1410" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
+        </div>
+      </header>
 
-    <main>
-      <section id="hero">
-        <div id="canvas-container"></div>
-        <div class="hero-overlay">
-          <h2>Hi — I'm Harish Kanna </h2>
-          <p>Interactive 3D portfolio built with Three.js and Node.js</p>
+      <section class="hero">
+        <div class="hero-copy">
+          <span>Portfolio</span>
+          <h1>Crafting digital products that feel alive.</h1>
+          <p>I'm Harish Kanna S, a developer who blends sharp system thinking with polished interface design. I build memorable web experiences that are bold, refined, and performance-driven.</p>
+          <div class="hero-actions">
+            <a class="button" href="#projects">Explore work</a>
+            <a class="button-secondary" href="#contact">Let’s talk</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <p class="panel-tag">Current focus</p>
+          <h2 class="panel-title">Design systems, branded interaction, composable code.</h2>
+          <p class="panel-copy">This portfolio is built with a bespoke dark interface, tactile motion, and a layout designed to highlight clarity without flattery.</p>
+          <div class="note-grid">
+            <div class="note-card"><h3>System-first UI</h3><p>Reusable components that work consistently across every viewport.</p></div>
+            <div class="note-card"><h3>Fast interactions</h3><p>Subtle motion and layered depth create an engaging digital atmosphere.</p></div>
+            <div class="note-card"><h3>Thoughtful storytelling</h3><p>Every section has a purpose, so your message lands with impact.</p></div>
+            <div class="note-card"><h3>Contact-ready</h3><p>Direct ways to connect are built in, with a polished message experience.</p></div>
+          </div>
         </div>
       </section>
 
-      <section id="about">
-        <h2>About</h2>
-        <p>I build interactive web experiences and 3D visualizations.</p>
+      <section class="section" id="about">
+        <div class="section-headline">
+          <span>Who am I</span>
+          <h2>Designer + engineer with a dark interface sensibility.</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>My work sits at the intersection of motion, product clarity, and digital craftsmanship. I focus on building polished experiences that feel grounded, considered, and unmistakably distinct.</p>
+            <div class="metrics">
+              <div class="metric"><strong>6+</strong><span>Years building products</span></div>
+              <div class="metric"><strong>20+</strong><span>Web & interface projects</span></div>
+              <div class="metric"><strong>80%</strong><span>Conversion growth for clients</span></div>
+            </div>
+          </div>
+          <div class="skills-grid" id="skills-list"></div>
+        </div>
       </section>
 
-      <section id="skills">
-        <h2>Skills</h2>
-        <ul id="skills-list"></ul>
+      <section class="section" id="projects">
+        <div class="section-headline">
+          <span>Selected work</span>
+          <h2>Projects that move attention.</h2>
+        </div>
+        <div class="projects-grid" id="projects-list"></div>
       </section>
 
-      <section id="projects">
-        <h2>Projects</h2>
-        <div id="projects-list"></div>
+      <section class="section" id="contact">
+        <div class="section-headline">
+          <span>Contact</span>
+          <h2>Ready to collaborate? Send a quick note.</h2>
+        </div>
+        <div class="contact-shell">
+          <div class="contact-copy">
+            <h3>Let's make something together.</h3>
+            <p>Whether it's a polished landing page, a product interface, or a bold brand activation, I build projects that are clean, fast, and built for impact.</p>
+            <ul class="contact-list">
+              <li>📧 harish@example.com</li>
+              <li>🌍 Based in India</li>
+              <li>⚡ Available for freelance & full-time work</li>
+            </ul>
+          </div>
+          <div class="contact-panel">
+            <form id="contact-form">
+              <label>Name<input type="text" name="name" placeholder="Harish Kanna" required /></label>
+              <label>Email<input type="email" name="email" placeholder="harish@example.com" required /></label>
+              <label>Message<textarea name="message" rows="5" placeholder="Tell me about your project…" required></textarea></label>
+              <button type="submit">Send message</button>
+              <p class="note" id="contact-response" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
       </section>
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <form id="contact-form">
-          <label>Name<br /><input type="text" name="name" required /></label>
-          <label>Email<br /><input type="email" name="email" required /></label>
-          <label>Message<br /><textarea name="message" rows="5" required></textarea></label>
-          <button type="submit">Send Message</button>
-          <p id="contact-response" aria-live="polite"></p>
-        </form>
-      </section>
-
-    <footer class="site-footer">
-      <p>© Harish Kanna S — <a href="#contact">Contact me</a></p>
-    </footer>
-    </main>
-
+      <footer class="site-footer">
+        <p>© 2026 Harish Kanna S</p>
+        <p><a href="https://github.com/Harishkanna1410" target="_blank" rel="noopener">GitHub</a> · <a href="https://linkedin.com/in/harishkanna1410" target="_blank" rel="noopener">LinkedIn</a></p>
+      </footer>
+    </div>
     <script type="module" src="/js/app.js"></script>
   </body>
 </html>
